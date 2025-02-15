@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random game</title>
+</head>
+<body>
+    <p></p>
+
+
+    <script>
+        let randomNum = Math.floor(Math.random() * 100) + 1,  
+        tryes = 10, 
+        answerP;
+        
+        while (tryes > 0){ 
+            answerP = prompt('Вгадайте число загадане компютером: ')
+            answerP = parseInt(answerP); 
+
+            if (isNaN(answerP)) {
+                console.log('Будь ласка, введіть число!');
+                continue;
+            }
+
+            if (answerP < randomNum){
+                console.log(`Ваша відповідь менша за загадане число(${answerP})`);
+               
+            } else if (answerP > randomNum) {
+                console.log(`Ваша відповідь більша за загадане число(${answerP})`);
+              
+            }else{
+                console.log('Вітаю, ви перемогли!!!');
+                break; 
+            }
+            tryes--; 
+            console.log(`Ви не вгадали. У вас залишилося ${tryes} спроб.`);
+
+            if (tryes == 0) {
+                console.log(`Нажаль, ви програли! Загадане число було: ${randomNum}`);
+            }
+                
+        }
+
+    </script>
+
+</body>
+</html>
