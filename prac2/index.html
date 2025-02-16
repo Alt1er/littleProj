@@ -7,27 +7,38 @@
 </head>
 <body>
     <script>
-        
-        let mansNumber = prompt("Введіть кількість символів в паролоі > 8: ");
-        mansNumber = parseInt(mansNumber)
+        let questionForUser = prompt('Введіть довжину пароля(мінімум 8символів): ');
+        questionForUser = parseInt(questionForUser);
+        let uppCaseCTXT = prompt('Використовувати верхній регістр? (Y/N)').toLowerCase();
+        let numberChar = prompt('Використовувати цифри? (Y/N)').toLowerCase();
+        let specChar = prompt('Використовувати спеціальні символи? (Y/N)').toLowerCase();
+        let resultPass = '';
+        let defaultCharStringTXT = 'abcdefghijklmnopqrstuvwxyz';
 
-        if(mansNumber < 8) {
-            console.log('Занадто короткий пароль');
-        }else if(isNaN(mansNumber)){
-            console.log('Ви нічого не ввели або скасували');
-        }else{
-            let readyNum = "";
-            const charSym = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-            for (let i = 0; i < mansNumber; i++){
-               
-                const randomIndex = Math.floor(Math.random() * charSym.length)
-                const randomChar = charSym.charAt(randomIndex);
-                readyNum += randomChar;
-            }
-            console.log(readyNum);
+        function validationAnsw(input) {
+            return input === 'y' || input === 'n'
         }
 
-    
+        if(isNaN(questionForUser) || questionForUser < 8){
+            console.log("Ви вели не правильні данні!!! Або закоротку довжину. Перевірте!");
+        }
+
+        if(!validationAnsw(uppCaseCTXT) || !validationAnsw(numberChar) || !validationAnsw(specChar)){
+            console.log('Ви повинні ввести лише Y або N');  
+        }
+
+        if(uppCaseCTXT === 'y') defaultCharStringTXT += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if(numberChar === 'y') defaultCharStringTXT += "0123456789";
+        if(specChar === 'y') defaultCharStringTXT += "!@#$%^&*()";
+
+        for (let i = 0; i < questionForUser; i++){
+            const randIndex = Math.floor(Math.random() * defaultCharStringTXT.length);
+            resultPass += defaultCharStringTXT.charAt(randIndex);
+        }
+        
+        console.log(`Ваш пароль: ${resultPass}`);
+        
     </script>
+    
 </body>
 </html>
